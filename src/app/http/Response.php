@@ -294,6 +294,7 @@ class Response{
                                         $this->status = 'PAGE EXPIRED';
             break;
             
+            case 'PDOException':
             case 'ValidationException': $this->httpCode = 422;
                                         $this->status = 'UNPROCESSABLE ENTITY';
             break;
