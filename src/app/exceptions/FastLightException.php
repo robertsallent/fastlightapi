@@ -26,9 +26,9 @@ class FastLightException extends Exception{
      * se haya indicado en la configuración.
      * 
      * @param string $message
-     * @param int $code
+     * @param int|string $code código del error
      * @param Throwable $previous
-     * @param String $type tipo original del error producido
+     * @param string $type tipo original del error producido
      * 
      */
     public function __construct(
@@ -39,7 +39,7 @@ class FastLightException extends Exception{
     ){
         
         // llama al constructor de la clase padre
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, intval($code), $previous);
   
         // recuerda el tipo de error original que se produjo. Esto es útil cuando
         // creamos estas excepciones a partir de objeto Throwable y queremos mostrar
