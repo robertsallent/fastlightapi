@@ -7,7 +7,7 @@
  * Es responsable de guardar los mensajes de error en base de datos y 
  * ficheros de LOG.
  *
- * Última revisión: 12/04/2026
+ * Última revisión: 19/04/2026
  * 
  * @author Robert Sallent <robert@fastlight.org>
  * @since v1.9.0
@@ -26,16 +26,16 @@ class FastLightException extends Exception{
      * se haya indicado en la configuración.
      * 
      * @param string $message
-     * @param int|string $code código del error
+     * @param int|string $code 
      * @param Throwable $previous
-     * @param string $type tipo original del error producido
+     * @param String $type tipo original del error producido
      * 
      */
     public function __construct(
         string $message         = "", 
         int|string $code        = 0, 
         ?Throwable $previous    = null,
-        string $type            = null
+        ?string $type           = null
     ){
         
         // llama al constructor de la clase padre
@@ -95,7 +95,12 @@ class FastLightException extends Exception{
      * Guarda un error en la base de datos.
      */
     protected function saveToDatabase(){
-        AppError::new($this->type, $this->message);
+        
+        // crea la instancia de AppError
+        $error = new AppError($this->type, $this->message);
+        
+        // lo guarda en BDD
+        $error->save();
     }
     
     
